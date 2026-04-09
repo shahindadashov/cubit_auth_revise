@@ -1,3 +1,6 @@
+import 'package:cubit_auth_revise/core/locator/service_locator.dart';
+import 'package:cubit_auth_revise/core/storage/local_storage_service.dart';
+import 'package:cubit_auth_revise/core/storage/storeage_keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +13,13 @@ class SplashCubit extends Cubit<SplashState> {
 
   void _init() async {
     emit(SplashLoading());
-    await Future.delayed(const Duration(seconds: 1));
-    emit(SplashLoaded());
+    String? token = sl<LocalStorageService>().read(key: StorageKeys.token);
+    if (token != null) {
+      await Future.delayed(const Duration(seconds: 1));
+      emit(NavigateToHome());
+    } else {
+      await Future.delayed(const Duration(seconds: 1));
+      emit(NavigateToLogin());
+    }
   }
 }

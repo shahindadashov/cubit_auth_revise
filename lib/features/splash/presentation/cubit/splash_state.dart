@@ -8,3 +8,7 @@ final class SplashInitial extends SplashState {}
 final class SplashLoading extends SplashState {}
 
 final class SplashLoaded extends SplashState {}
+
+final class NavigateToLogin extends SplashState {}
+
+final class NavigateToHome extends SplashState {}
